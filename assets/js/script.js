@@ -7,8 +7,13 @@ var takeQuizEl = document.querySelector("#take-quiz");
 //Creates variable for how long the quiz will last
 var timeRemaining = 60;
 
+takeQuizEl.addEventListener("click", function () {
+  settime();
+});
+
 //Funtion that will create the timer for how long you create it for
 function settime() {
+  takeQuizEl = " ";
   var timeInterval = setInterval(function () {
     timeRemaining--;
     timeElement.textContent = "Quiz timer: " + timeRemaining;
@@ -19,10 +24,6 @@ function settime() {
     }
   }, 1000);
 }
-
-takeQuizEl.addEventListener("click", function () {
-  settime();
-});
 
 function sendMessage() {
   mainEl.textContent = "";
