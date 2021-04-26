@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+html {
+  font-size: 62.5%;
+}
 
 .container {
   display: flex;
@@ -8,7 +11,20 @@
 }
 .header {
   align-items: center;
+  font-size: 5rem;
+  margin: 1rem 0 0 2.5rem;
 }
 .timer {
-  justify-content: flex-end;
+  right: 1rem;
+  top: 1rem;
+  position: absolute;
+  font-size: 1.75rem;
+  align-self: center;
+}
+
+button {
+  align-items: center;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background-color: red;
+  font-size: 3rem;
 }
