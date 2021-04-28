@@ -3,16 +3,33 @@
 }
 html {
   font-size: 62.5%;
+  background-color: aquamarine;
+  line-height: 1.5;
 }
 
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
-.header {
+.container p {
+  display: flex;
+  font-size: 2.5rem;
+  white-space: pre-wrap;
+  text-align: center;
+  flex-direction: column;
+}
+.container-intro {
+  /* border: 0.5rem solid black; */
+  display: flex;
+  flex-direction: column;
+}
+
+.container-header {
   align-items: center;
   font-size: 5rem;
   margin: 1rem 0 0 2.5rem;
+  padding-bottom: 4rem;
 }
 .timer {
   right: 1rem;
@@ -22,9 +39,30 @@ html {
   align-self: center;
 }
 
-button {
+#take-quiz {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  align-self: center;
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   background-color: red;
   font-size: 3rem;
+}
+
+.hiddenbutton {
+  visibility: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.container-questions {
+  display: flex;
+  justify-content: center;
+}
+
+#question {
+  font-size: 2.25rem;
+  position: relative;
 }

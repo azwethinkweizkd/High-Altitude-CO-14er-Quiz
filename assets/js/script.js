@@ -1,59 +1,66 @@
 //Selects the element and creates the timer where the time left in the quiz will be displayed
-var timeElement = document.querySelector(".timer");
+let timeElement = document.querySelector(".timer");
 
-var mainEl = document.getElementById("main");
+let mainEl = document.getElementById(".main");
 
-var takeQuizEl = document.querySelector("#take-quiz");
+let takeQuizEl = document.querySelector("#take-quiz");
 
-var allQuestions = [
-  (question1 = {
+let currQuest = document.querySelector("#question");
+
+let ans1 = document.getElementById("ans1");
+let ans2 = document.getElementById("ans2");
+let ans3 = document.getElementById("ans3");
+let ans4 = document.getElementById("ans4");
+
+let allQuestions = [
+  (question = {
     question: "Which mountain is the tallest in Colorado?",
-    answers: ["Sunshine Peak", "Mount Evans", "Mount Massive", "Mount Elbert"],
+    answers: ["Mount Elbert", "Sunshine Peak", "Mount Evans", "Mount Massive"],
     correctAnswer: "Mount Elbert",
   }),
-  (question2 = {
+  (question = {
     question: "How many 14k ft. mountains are there in Colorado?",
-    answers: ["57", "48", "62", "53"],
+    answers: ["57", "48", "53", "62"],
     correctAnswer: "53",
   }),
-  (question3 = {
+  (question = {
     question: "Blanca Peak belongs to which group of mountain ranges?",
     answers: [
+      "Sangre de Cristo Range",
       "San Juan Mountains",
       "Sawatch Range",
       "Culebra Range",
-      "Sangre de Cristo Range",
     ],
     correctAnswer: "Sangre de Cristo Range",
   }),
-  (question4 = {
+  (question = {
     question: "The worlds highest cog railway goes to the peak of which 14er?",
     answers: ["Mount Elbert", "Mount Lincoln", "Tabeguache Peak", "Pikes Peak"],
     correctAnswer: "Pikes Peak",
   }),
-  (question5 = {
+  (question = {
     question:
       "The Collegiate Peaks consist of Mount Harvard, Mount Yale, Mount Columbia, and which other mountain?",
     answers: [
       "Mount Brown",
+      "Mount Princeton",
       "Mount Cornell",
       "Dartmouth Peak",
-      "Mount Princeton",
     ],
     correctAnswer: "Mount Princeton",
   }),
-  (question6 = {
+  (question = {
     question:
       "Which mountain was displayed on the Colorado State Quarter released in 2006?",
-    answers: ["Mount Elbert", "Grays Peak", "Torreys Peak", "Longs Peak"],
+    answers: ["Longs Peak", "Mount Elbert", "Grays Peak", "Torreys Peak"],
     correctAnswer: "Longs Peak",
   }),
-  (question7 = {
+  (question = {
     question: "What is the height of Mount Antero?",
-    answers: ["15213", "14440", "14216", "14276"],
+    answers: ["15213", "14440", "14276", "14216"],
     correctAnswer: "14276",
   }),
-  (question8 = {
+  (question = {
     question:
       "Unfortunately, this mountain came up short by 12 ft. and is the second tallest mountain in Colorado. That mountain is...?",
     answers: [
@@ -64,12 +71,12 @@ var allQuestions = [
     ],
     correctAnswer: "Mount Massive",
   }),
-  (question9 = {
+  (question = {
     question: "What was the original name of Mount Evans?",
     answers: ["Mount Rosalie", "Mount Bierstadt", "Echo Peak", "Mount Ouray"],
     correctAnswer: "Mount Rosalie",
   }),
-  (question10 = {
+  (question = {
     question: "Uncompahgre Peak was named by which Native American Tribe?",
     answers: [
       "Arapahoe nation",
@@ -81,39 +88,109 @@ var allQuestions = [
   }),
 ];
 //Creates variable for how long the quiz will last
-var timeRemaining = 60;
+
+let timeRemaining = 60;
+
+let currentQuestIndex = 0;
+
+let shuffledQuest;
+function score() {
+  //logic
+}
+
+ans1.addEventListener("click", function () {
+  // alert(ans1.innerHTML);
+  // score(ans1.innerHTML);
+  //if(this.inputMode("You selected " + ans1.innerHTML + " continue..y/n"))
+
+  // compare selected answser with the correct answer for this given index
+  // if they are matching then increase correct answer + 1,
+  // if not wronasnger+1
+
+  if (ans1.innerHTML === allQuestions[currentQuestIndex].correctAnswer) {
+    score++;
+  }
+  if (ans1.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
+    timeRemaining - 3;
+  }
+  // if(ans1.innerHTML==allquestions[currentQuestIndex].correctAnswer)
+  // c=c+1;
+  // else
+  // w=w+1
+
+  displayQuestion(currentQuestIndex);
+});
+
+ans2.addEventListener("click", function () {
+  // alert(ans2.innerHTML);
+  // displayQuestion(currentQuestIndex);
+  if (ans2.innerHTML === allQuestions[currentQuestIndex].correctAnswer) {
+    score++;
+  }
+  if (ans2.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
+    timeRemaining - 3;
+  }
+});
+
+ans3.addEventListener("click", function () {
+  // alert(ans3.innerHTML);
+  // displayQuestion(currentQuestIndex);
+  if (ans3.innerHTML === allQuestions[currentQuestIndex].correctAnswer) {
+    score++;
+  }
+  if (ans3.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
+    timeRemaining - 3;
+  }
+});
+
+ans4.addEventListener("click", function () {
+  // alert(ans4.innerHTML);
+  // displayQuestion(currentQuestIndex);
+  if (ans4.innerHTML === allQuestions[currentQuestIndex].correctAnswer) {
+    score++;
+  }
+  if (ans4.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
+    timeRemaining - 3;
+  }
+});
 
 takeQuizEl.addEventListener("click", function () {
   startQuiz();
 });
 
+function displayQuestion() {
+  // alert(currentQuestIndex);
+  currQuest.innerHTML = allQuestions[currentQuestIndex].question;
+  ans1.innerHTML = allQuestions[currentQuestIndex].answers[0];
+  ans2.innerHTML = allQuestions[currentQuestIndex].answers[1];
+  ans3.innerHTML = allQuestions[currentQuestIndex].answers[2];
+  ans4.innerHTML = allQuestions[currentQuestIndex].answers[3];
+  currentQuestIndex = currentQuestIndex + 1;
+}
 //Funtion that will create the timer for how long you create it for
 function startQuiz() {
   takeQuizEl.setAttribute("style", "display:none");
-  var timeInterval = setInterval(function () {
+  ans1.setAttribute("style", "visibility:visible");
+  ans2.setAttribute("style", "visibility:visible");
+  ans3.setAttribute("style", "visibility:visible");
+  ans4.setAttribute("style", "visibility:visible");
+  displayQuestion();
+  //let currentQuestIndex = currentQuestIndex + 1;
+  let timeInterval = setInterval(function () {
     timeRemaining--;
     timeElement.textContent = "Time Remaining: " + timeRemaining;
 
     if (timeRemaining === 0) {
       clearInterval(timeInterval);
-      sendMessage();
+      endQuiz();
     }
   }, 1000);
 }
 
-// function sendMessage() {
-//   mainEl.setAttribute("style", "display:none");
-//   var endMsg = mainEl.createElement("div");
-//   endMsg.textContent = "Quiz has ended";
-//   mainEl.appendChild(endMsg);
-// }
-
-function quizQuestions() {
-  for (var i = 0; i < allQuestions.length; i++) {
-    //pull out each question individually that are objects
-    //display question on the screen and the interaction with it
-    //display correct or wrong
-    //move to the next question
-    //record the score if a correct answer is achieved
-  }
+function endQuiz() {
+  timeElement.setAttribute("style", "display:none");
+  mainEl.setAttribute("style", "display:none");
+  var endMsg = mainEl.createElement("p");
+  endMsg.textContent = "Quiz has ended, lets see how you did!";
+  mainEl.appendChild(endMsg);
 }

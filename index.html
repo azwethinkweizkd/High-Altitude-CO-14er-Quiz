@@ -9,21 +9,25 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header class="container">
+    <header class="container container-header">
       <h1 class="header">🌄High Altitude CO 14er Quiz🌄</h1>
       <div class="timer"></div>
     </header>
 
     <main class="container" id="main">
-      <button id="take-quiz">Take Quiz</button>
-      <div class="questions">
-        <h2 class="question"></h2>
-        <ul class="answers">
-          <li id="first-child-ul"></li>
-          <li id="second-child-ul"></li>
-          <li id="third-child-ul"></li>
-          <li id="fourth-child-ul"></li>
-        </ul>
+      <div class="container-intro">
+        <p>
+          Test the height of your knowledge with this quiz that will take your
+          breathe away! Are you ready to bag your first 14er Quiz?
+        </p>
+        <button id="take-quiz">Take Quiz</button>
+      </div>
+      <div class="container-questions">
+        <h2 id="question"></h2>
+        <button id="ans1" class="hiddenbutton"></button>
+        <button id="ans2" class="hiddenbutton"></button>
+        <button id="ans3" class="hiddenbutton"></button>
+        <button id="ans4" class="hiddenbutton"></button>
       </div>
     </main>
     <script src="./assets/js/script.js"></script>
