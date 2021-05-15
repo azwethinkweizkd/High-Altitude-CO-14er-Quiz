@@ -9,6 +9,11 @@ let ans3 = document.getElementById("ans3");
 let ans4 = document.getElementById("ans4");
 let intro = document.getElementById("intro");
 let scores = document.getElementById("scores");
+//Creates variable for how long the quiz will last
+let timeRemaining = 60;
+let currentQuestIndex = 0;
+let userScore = 0;
+let highScores = [];
 let allQuestions = [
   {
     question: "Which mountain is the tallest in Colorado?",
@@ -84,14 +89,42 @@ let allQuestions = [
     correctAnswer: "Ute nation",
   },
 ];
-//Creates variable for how long the quiz will last
-let timeRemaining = 60;
-let currentQuestIndex = 0;
-let shuffledQuest;
-function score() {
-  //logic
-}
 
+takeQuizEl.addEventListener("click", function () {
+  startQuiz();
+});
+//Function that will create the timer for how long you create it for
+function startQuiz() {
+  takeQuizEl.setAttribute("style", "display:none");
+  intro.setAttribute("style", "display:none");
+  displayQuestion();
+  //let currentQuestIndex = currentQuestIndex + 1;
+  let timeInterval = setInterval(function () {
+    timeRemaining--;
+    timeElement.textContent = "Time Remaining: " + timeRemaining;
+    if (currentQuestIndex === allQuestions.length) {
+      clearInterval(timeInterval);
+      endQuiz();
+    }
+    if (timeRemaining === 0) {
+      clearInterval(timeInterval);
+      endQuiz();
+    }
+  }, 1000);
+}
+function displayQuestion() {
+  console.log();
+  // alert(currentQuestIndex);
+  currQuest.innerHTML = allQuestions[currentQuestIndex].question;
+  ans1.setAttribute("style", "visibility:visible");
+  ans1.innerHTML = allQuestions[currentQuestIndex].answers[0];
+  ans2.setAttribute("style", "visibility:visible");
+  ans2.innerHTML = allQuestions[currentQuestIndex].answers[1];
+  ans3.setAttribute("style", "visibility:visible");
+  ans3.innerHTML = allQuestions[currentQuestIndex].answers[2];
+  ans4.setAttribute("style", "visibility:visible");
+  ans4.innerHTML = allQuestions[currentQuestIndex].answers[3];
+}
 ans1.addEventListener("click", function () {
   // alert(ans1.innerHTML);
   // score(ans1.innerHTML);
@@ -105,7 +138,7 @@ ans1.addEventListener("click", function () {
     userScore++;
   }
   if (ans1.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
-    timeRemaining - 3;
+    timeRemaining--;
   }
   // if(ans1.innerHTML==allquestions[currentQuestIndex].correctAnswer)
   // c=c+1;
@@ -127,7 +160,7 @@ ans2.addEventListener("click", function () {
     userScore++;
   }
   if (ans2.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
-    timeRemaining - 3;
+    timeRemaining--;
   }
   currentQuestIndex++;
   if (currentQuestIndex === allQuestions.length) {
@@ -145,7 +178,7 @@ ans3.addEventListener("click", function () {
     userScore++;
   }
   if (ans3.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
-    timeRemaining - 3;
+    timeRemaining--;
   }
   currentQuestIndex++;
   if (currentQuestIndex === allQuestions.length) {
@@ -163,7 +196,7 @@ ans4.addEventListener("click", function () {
     userScore++;
   }
   if (ans4.innerHTML !== allQuestions[currentQuestIndex].correctAnswer) {
-    timeRemaining - 3;
+    timeRemaining--;
   }
   currentQuestIndex++;
   if (currentQuestIndex === allQuestions.length) {
@@ -173,38 +206,8 @@ ans4.addEventListener("click", function () {
   }
 });
 
-takeQuizEl.addEventListener("click", function () {
-  startQuiz();
-});
-
-function displayQuestion() {
-  console.log();
-  // alert(currentQuestIndex);
-  currQuest.innerHTML = allQuestions[currentQuestIndex].question;
-  ans1.innerHTML = allQuestions[currentQuestIndex].answers[0];
-  ans2.innerHTML = allQuestions[currentQuestIndex].answers[1];
-  ans3.innerHTML = allQuestions[currentQuestIndex].answers[2];
-  ans4.innerHTML = allQuestions[currentQuestIndex].answers[3];
-}
-//Funtion that will create the timer for how long you create it for
-function startQuiz() {
-  takeQuizEl.setAttribute("style", "display:none");
-  intro.setAttribute("style", "display:none");
-  ans1.setAttribute("style", "visibility:visible");
-  ans2.setAttribute("style", "visibility:visible");
-  ans3.setAttribute("style", "visibility:visible");
-  ans4.setAttribute("style", "visibility:visible");
-  displayQuestion();
-  //let currentQuestIndex = currentQuestIndex + 1;
-  let timeInterval = setInterval(function () {
-    timeRemaining--;
-    timeElement.textContent = "Time Remaining: " + timeRemaining;
-
-    if (timeRemaining === 0) {
-      clearInterval(timeInterval);
-      endQuiz();
-    }
-  }, 1000);
+function score() {
+  //logic
 }
 
 function endQuiz() {
