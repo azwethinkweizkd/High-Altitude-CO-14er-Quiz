@@ -56,6 +56,10 @@ html {
   justify-content: center;
   text-align: center;
 }
+.container-answers {
+  display: flex;
+  align-items: center;
+}
 
 .hiddenbutton {
   visibility: hidden;
@@ -75,9 +79,4 @@ html {
   align-content: center;
   justify-content: center;
   text-align: center;
-}
-
-.container-answers {
-  display: flex;
-  justify-content: center;
 }
