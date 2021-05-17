@@ -8,12 +8,13 @@ let ans2 = document.getElementById("ans2");
 let ans3 = document.getElementById("ans3");
 let ans4 = document.getElementById("ans4");
 let intro = document.getElementById("intro");
-let scores = document.getElementById("scores");
+let scores = document.getElementById("endScore");
+let highScores = document.getElementById("highScores");
 //Creates variable for how long the quiz will last
 let timeRemaining = 60;
 let currentQuestIndex = 0;
 let userScore = 0;
-let highScores = [];
+let userHighScores = [];
 let allQuestions = [
   {
     question: "Which mountain is the tallest in Colorado?",
@@ -90,9 +91,11 @@ let allQuestions = [
   },
 ];
 
+//Event Listener for the start quiz button
 takeQuizEl.addEventListener("click", function () {
   startQuiz();
 });
+
 //Function that will create the timer for how long you create it for
 function startQuiz() {
   takeQuizEl.setAttribute("style", "display:none");
@@ -102,16 +105,13 @@ function startQuiz() {
   let timeInterval = setInterval(function () {
     timeRemaining--;
     timeElement.textContent = "Time Remaining: " + timeRemaining;
-    if (currentQuestIndex === allQuestions.length) {
-      clearInterval(timeInterval);
-      endQuiz();
-    }
     if (timeRemaining === 0) {
       clearInterval(timeInterval);
       endQuiz();
     }
   }, 1000);
 }
+//Function to display the next question in the allQUestions object and their answers
 function displayQuestion() {
   console.log();
   // alert(currentQuestIndex);
@@ -125,6 +125,7 @@ function displayQuestion() {
   ans4.setAttribute("style", "visibility:visible");
   ans4.innerHTML = allQuestions[currentQuestIndex].answers[3];
 }
+//Event Listeners for each button on html
 ans1.addEventListener("click", function () {
   // alert(ans1.innerHTML);
   // score(ans1.innerHTML);
@@ -151,7 +152,6 @@ ans1.addEventListener("click", function () {
     displayQuestion(currentQuestIndex);
   }
 });
-
 ans2.addEventListener("click", function () {
   // alert(ans2.innerHTML);
   // displayQuestion(currentQuestIndex);
@@ -169,7 +169,6 @@ ans2.addEventListener("click", function () {
     displayQuestion(currentQuestIndex);
   }
 });
-
 ans3.addEventListener("click", function () {
   // alert(ans3.innerHTML);
   // displayQuestion(currentQuestIndex);
@@ -187,7 +186,6 @@ ans3.addEventListener("click", function () {
     displayQuestion(currentQuestIndex);
   }
 });
-
 ans4.addEventListener("click", function () {
   // alert(ans4.innerHTML);
   // displayQuestion(currentQuestIndex);
@@ -206,14 +204,64 @@ ans4.addEventListener("click", function () {
   }
 });
 
-function score() {
-  //logic
-}
-
 function endQuiz() {
+  scores.innerHTML = "";
+  ans1.setAttribute("style", "visibility:hidden");
+  ans2.setAttribute("style", "visibility:hidden");
+  ans3.setAttribute("style", "visibility:hidden");
+  ans4.setAttribute("style", "visibility:hidden");
   timeElement.setAttribute("style", "display:none");
   mainEl.setAttribute("style", "display:none");
   var endMsg = document.createElement("p");
   endMsg.textContent = "Quiz has ended, lets see how you did!";
+  endMsg.setAttribute("style", "padding-bottom:25px");
   scores.appendChild(endMsg);
+  var endScore = document.createElement("p");
+  endScore.setAttribute("style", "padding-bottom:25px");
+  if (userScore === 10) {
+    endScore.textContent =
+      "You've reached the summit with a score of " + userScore + "!";
+  } else if (userScore < 10 && userScore >= 7) {
+    endScore.textContent =
+      "You're almost there, just a few more switchbacks. Your score is: " +
+      userScore +
+      "!";
+  } else if (userScore < 7 && userScore >= 4) {
+    endScore.textContent =
+      "Only halfway, keep going! Your score is: " + userScore + "!";
+  } else {
+    endScore.textContent =
+      "Maybe you should stick to the low lands....Your score is: " +
+      userScore +
+      "!";
+  }
+  scores.appendChild(endScore);
+  score();
+}
+
+function score() {
+  highScores.innerHTML = "";
+  var userInputForm = document.createElement("form");
+  userInputForm.setAttribute("action", "");
+  var label = document.createElement("label");
+  userInputForm.setAttribute("for", "user");
+  userInputForm.textContent = "Your Initials:";
+  var br1 = document.createElement("br");
+  var userInput = document.createElement("input");
+  userInput.setAttribute("type", "text");
+  userInput.setAttribute("id", "user");
+  userInput.setAttribute("name", "user");
+  userInput.setAttribute("placeholder", "Example: AAA");
+  var br2 = document.createElement("br");
+  var br3 = document.createElement("br");
+  var submitBtn = document.createElement("input");
+  submitBtn.setAttribute("type", "submit");
+  submitBtn.setAttribute("value", "Submit");
+  endScore.appendChild(userInputForm);
+  userInputForm.appendChild(label);
+  userInputForm.appendChild(br1);
+  userInputForm.appendChild(userInput);
+  userInputForm.appendChild(br2);
+  userInputForm.appendChild(br3);
+  userInputForm.appendChild(submitBtn);
 }
