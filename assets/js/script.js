@@ -278,33 +278,37 @@ function saveScore() {
     // localStorage.setItem("user", currentUser);
     // localStorage.setItem("score", userScore);
     // localStorage.setItem(currentUser, userScore);
-    for (let i = 0; i < userHighScores.length; i++) {
-      const element = userHighScores[i];
-    }
+    // for (let i = 0; i < userHighScores.length; i++) {
+    //   const element = userHighScores[i];
+    // }
     var savedUser = {};
     savedUser["user"] = currentUser;
     savedUser["score"] = userScore;
     userHighScores.push(savedUser);
 
-    localStorage.setItem("highScores", JSON.stringify(userHighScores));
+    localStorage.setItem("topUsers", JSON.stringify(userHighScores));
+    renderHighScores();
   });
 }
 
 function renderHighScores() {
   highScores.innerHTML = "";
   highScoresSpan.textContent = userHighScores.length;
-
+  var storedHighScores = JSON.parse(localStorage.getItem(userHighScores));
+  if (storedHighScores !== null) {
+    userHighScores = storedHighScores;
+  }
   for (var i = 0; i < userHighScores.length; i++) {
-    var prevScores = userHighScores[i];
+    var prevScores = userHighScores[i].savedUser;
 
     var li = document.createElement("li");
-    li.textContent = currentUser;
+    li.textContent = prevScores;
     li.setAttribute("data-index", i);
 
     var pScore = document.createElement("p");
     pScore.textContent = userScore;
 
     li.appendChild(pScore);
-    prevScores.appendChild(li);
+    highScores.appendChild(li);
   }
 }
