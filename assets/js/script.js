@@ -14,6 +14,7 @@ let highScores = document.getElementById("highScores");
 let timeRemaining = 60;
 let currentQuestIndex = 0;
 let userScore = 0;
+let currentUser = "";
 let userHighScores = [];
 let allQuestions = [
   {
@@ -264,4 +265,21 @@ function score() {
   userInputForm.appendChild(br2);
   userInputForm.appendChild(br3);
   userInputForm.appendChild(submitBtn);
+  const input = document.getElementById("user");
+  input.addEventListener("change", updateValue);
+  function updateValue(event) {
+    currentUser = event.target.value;
+  }
+  submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    // console.log(currentUser);
+
+    // localStorage.setItem("user", currentUser);
+    // localStorage.setItem("score", userScore);
+    localStorage.setItem(currentUser, userScore);
+
+    let savedUser = {};
+    savedUser.push(currentUser + userScore);
+    userHighScores.push(savedUser);
+  });
 }
