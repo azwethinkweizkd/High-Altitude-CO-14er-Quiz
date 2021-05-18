@@ -271,6 +271,7 @@ function saveScore() {
   function updateValue(event) {
     currentUser = event.target.value;
   }
+
   userInputForm.addEventListener("submit", function (event) {
     event.preventDefault();
     // console.log(currentUser);
@@ -281,9 +282,13 @@ function saveScore() {
     // for (let i = 0; i < userHighScores.length; i++) {
     //   const element = userHighScores[i];
     // }
+
     var savedUser = {};
     savedUser["user"] = currentUser;
     savedUser["score"] = userScore;
+
+    let prevScores = JSON.parse(localStorage.getItem("topUsers"));
+    userHighScores.push(prevScores);
     userHighScores.push(savedUser);
 
     localStorage.setItem("topUsers", JSON.stringify(userHighScores));
@@ -292,23 +297,21 @@ function saveScore() {
 }
 
 function renderHighScores() {
-  highScores.innerHTML = "";
-  highScoresSpan.textContent = userHighScores.length;
-  var storedHighScores = JSON.parse(localStorage.getItem(userHighScores));
-  if (storedHighScores !== null) {
-    userHighScores = storedHighScores;
-  }
-  for (var i = 0; i < userHighScores.length; i++) {
-    var prevScores = userHighScores[i].savedUser;
-
-    var li = document.createElement("li");
-    li.textContent = prevScores;
-    li.setAttribute("data-index", i);
-
-    var pScore = document.createElement("p");
-    pScore.textContent = userScore;
-
-    li.appendChild(pScore);
-    highScores.appendChild(li);
-  }
+  //   highScores.innerHTML = "";
+  //   highScoresSpan.textContent = userHighScores.length;
+  //   var storedHighScores = JSON.parse(localStorage.getItem("topUsers"));
+  //   if (storedHighScores !== null) {
+  //     userHighScores = storedHighScores;
+  //   }
+  //   for (var i = 0; i < userHighScores.length; i++) {
+  //     var prevScores = storedHighScores;
+  //     var li = document.createElement("li");
+  //     li.textContent = prevScores;
+  //     li.setAttribute("data-index", i);
+  //     var pScore = document.createElement("p");
+  //     pScore.textContent = userScore;
+  //     li.appendChild(pScore);
+  //     highScores.appendChild(li);
+  //   }
+  // }
 }
