@@ -307,12 +307,27 @@ function renderHighScores() {
   if (storedHighScores !== null) {
     userHighScores = storedHighScores;
   }
+  var restartForm = document.createElement("form");
+  restartForm.setAttribute("action", "");
+  restartForm.setAttribute("style", "padding-bottom:2.5rem");
+  var restart = document.createElement("h3");
+  restart.textContent = "Would you like to climb again?";
+  restart.setAttribute("style", "padding-bottom:1.5rem");
+  var restartBtn = document.createElement("input");
+  restartBtn.setAttribute("type", "button");
+  restartBtn.setAttribute("value", "Restart Quiz");
+  restartBtn.setAttribute("style", "background:white");
+  restartBtn.setAttribute("style", "justify-content:center");
+  restartForm.appendChild(restart);
+  restartForm.appendChild(restartBtn);
+  highScores.appendChild(restartForm);
+  restartBtn.addEventListener("click", function () {
+    window.location.reload("Refresh");
+  });
   var hsTitle = document.createElement("h3");
   hsTitle.textContent = "High Scores:";
   hsTitle.setAttribute("style", "padding-bottom:1.5rem");
-  hsTitle.setAttribute("style", "text-decoration:underline");
   hsTitle.setAttribute("style", "font-size:4rem");
-
   highScores.appendChild(hsTitle);
   for (var i = 0; i < userHighScores.length; i++) {
     var li = document.createElement("li");
