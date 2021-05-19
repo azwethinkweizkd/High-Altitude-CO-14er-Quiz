@@ -287,8 +287,13 @@ function saveScore() {
     savedUser["user"] = currentUser;
     savedUser["score"] = userScore;
 
-    let prevScores = JSON.parse(localStorage.getItem("topUsers") || "[]");
+    let prevScores = JSON.parse(localStorage.getItem("topUsers"));
+    if ("topUsers" === null) {
+      prevScores = savedUser;
+    }
+
     userHighScores.push(prevScores);
+
     userHighScores.push(savedUser);
 
     localStorage.setItem("topUsers", JSON.stringify(userHighScores));
