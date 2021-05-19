@@ -92,7 +92,7 @@ let allQuestions = [
     correctAnswer: "Ute nation",
   },
 ];
-
+timeElement.setAttribute("style", "visibility:hidden");
 //Event Listener for the start quiz button
 takeQuizEl.addEventListener("click", function () {
   startQuiz();
@@ -102,6 +102,7 @@ takeQuizEl.addEventListener("click", function () {
 function startQuiz() {
   takeQuizEl.setAttribute("style", "display:none");
   intro.setAttribute("style", "display:none");
+  timeElement.setAttribute("style", "visibility:visible");
   displayQuestion();
   //let currentQuestIndex = currentQuestIndex + 1;
   let timeInterval = setInterval(function () {
@@ -208,6 +209,7 @@ ans4.addEventListener("click", function () {
 
 function endQuiz() {
   scores.innerHTML = "";
+  // timeElement.setAttribute("style", "visibility:hidden");
   ans1.setAttribute("style", "visibility:hidden");
   ans2.setAttribute("style", "visibility:hidden");
   ans3.setAttribute("style", "visibility:hidden");
@@ -287,12 +289,7 @@ function saveScore() {
     savedUser["user"] = currentUser;
     savedUser["score"] = userScore;
 
-    let prevScores = JSON.parse(localStorage.getItem("topUsers"));
-    if ("topUsers" === null) {
-      prevScores = savedUser;
-    }
-
-    userHighScores.push(prevScores);
+    let userHighScores = JSON.parse(localStorage.getItem("topUsers")) || [];
 
     userHighScores.push(savedUser);
 
@@ -302,21 +299,26 @@ function saveScore() {
 }
 
 function renderHighScores() {
-  //   highScores.innerHTML = "";
-  //   highScoresSpan.textContent = userHighScores.length;
-  //   var storedHighScores = JSON.parse(localStorage.getItem("topUsers"));
-  //   if (storedHighScores !== null) {
-  //     userHighScores = storedHighScores;
-  //   }
-  //   for (var i = 0; i < userHighScores.length; i++) {
-  //     var prevScores = storedHighScores;
-  //     var li = document.createElement("li");
-  //     li.textContent = prevScores;
-  //     li.setAttribute("data-index", i);
-  //     var pScore = document.createElement("p");
-  //     pScore.textContent = userScore;
-  //     li.appendChild(pScore);
-  //     highScores.appendChild(li);
-  //   }
-  // }
+  highScores.innerHTML = "";
+  scores.setAttribute("style", "display:none");
+  intro.setAttribute("style", "display:none");
+  highScoresSpan.textContent = userHighScores.length;
+  var storedHighScores = JSON.parse(localStorage.getItem("topUsers"));
+  if (storedHighScores !== null) {
+    userHighScores = storedHighScores;
+  }
+  var hsTitle = document.createElement("h3");
+  hsTitle.textContent = "High Scores:";
+  hsTitle.setAttribute("style", "padding-bottom:1.5rem");
+  hsTitle.setAttribute("style", "text-decoration:underline");
+  hsTitle.setAttribute("style", "font-size:4rem");
+
+  highScores.appendChild(hsTitle);
+  for (var i = 0; i < userHighScores.length; i++) {
+    var li = document.createElement("li");
+    li.textContent = userHighScores[i].user + " - " + userHighScores[i].score;
+    li.setAttribute("data-index", i);
+    li.setAttribute("style", "padding-top:1rem");
+    highScores.appendChild(li);
+  }
 }

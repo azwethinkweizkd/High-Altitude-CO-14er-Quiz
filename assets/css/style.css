@@ -37,6 +37,10 @@ html {
   position: absolute;
   font-size: 1.75rem;
   align-self: center;
+  border: 0.25rem solid black;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }
 
 #take-quiz {
@@ -55,12 +59,14 @@ html {
   align-content: center;
   justify-content: center;
   text-align: center;
+  align-items: center;
   /* text-decoration: underline; */
 }
 .container-answers {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1.5rem;
 }
 
 .hiddenbutton {
@@ -76,13 +82,14 @@ html {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1.6rem;
   margin: 4px 2px;
 }
 
 .container-questions {
   display: flex;
   justify-content: center;
+  margin-top: 7.5rem;
 }
 
 #endScore {
@@ -91,4 +98,13 @@ html {
   align-content: center;
   justify-content: center;
   text-align: center;
+}
+
+#highScores {
+  font-size: 2.25rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  list-style-type: none;
 }
